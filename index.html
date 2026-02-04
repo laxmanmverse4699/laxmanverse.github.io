@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <title>Laxman Mailari | Software Engineer Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests">
   <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -139,7 +140,7 @@
             <li>Available for 2025 internships &amp; part-time work</li>
           </ul>
           <div class="contact-cta">
-            <a class="btn primary" href="mailto:laxman.laxman@student.uva.nl">
+            <a class="btn primary ob-email-link" href="#" data-user="laxman.laxman" data-domain="student.uva.nl">
               Schedule an intro call
             </a>
             <a class="btn ghost" href="resume.pdf" target="_blank" rel="noopener">
@@ -149,7 +150,7 @@
         </div>
 
         <div class="contact-items">
-          <a class="contact-item" href="mailto:laxman.laxman@student.uva.nl">
+          <a class="contact-item ob-email-link" href="#" data-user="laxman.laxman" data-domain="student.uva.nl">
             <div class="contact-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
@@ -161,7 +162,7 @@
             <div>
               <span class="label"
                 style="display:block; font-size:0.8rem; color:var(--text-muted); margin-bottom:4px;">Email</span>
-              <strong>laxman.laxman@student.uva.nl</strong>
+              <strong class="ob-email" data-user="laxman.laxman" data-domain="student.uva.nl"></strong>
             </div>
           </a>
 
@@ -222,6 +223,22 @@
 
     document.querySelectorAll('.fade-in-up').forEach(el => {
       observer.observe(el);
+    });
+
+    // Email obfuscation
+    document.querySelectorAll('.ob-email').forEach(el => {
+      const user = el.getAttribute('data-user');
+      const domain = el.getAttribute('data-domain');
+      if (user && domain) {
+        el.textContent = `${user}@${domain}`;
+      }
+    });
+    document.querySelectorAll('.ob-email-link').forEach(a => {
+      const user = a.getAttribute('data-user');
+      const domain = a.getAttribute('data-domain');
+      if (user && domain) {
+        a.setAttribute('href', `mailto:${user}@${domain}`);
+      }
     });
   </script>
 </body>
