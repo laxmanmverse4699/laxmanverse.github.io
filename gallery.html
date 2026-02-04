@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gallery | Laxman Mailari</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="lm-header">
+    <div class="container">
+      <a href="index.html" class="lm-logo">
+        <img src="assets/logo-new.png" alt="Laxman Mailari Logo" class="lm-logo-mark" />
+        <div class="lm-logo-text">
+          <div class="lm-logo-name">Laxman Mailari</div>
+          <div class="lm-logo-slogan">Master’s Student at Uva & VU Amsterdam · Ex-Software Engineer</div>
+        </div>
+      </a>
+      <nav class="lm-nav">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="section-header fade-in-up" style="margin-top: 60px; text-align: left;">
+      <h1 style="font-family: var(--font-display); font-size: 2.2rem; margin: 0 0 8px;">Gallery</h1>
+      <p style="max-width: 700px; color: var(--text-muted);">Snapshots and visuals from key projects.</p>
+    </section>
+
+    <section class="fade-in-up">
+      <div class="gallery-grid">
+        <article class="gallery-card">
+          <img src="assets/project-wildfire.jpg" alt="Wildfire digital twin dashboard" />
+          <div class="gallery-card-body">
+            <strong>Digital Twin for Wildfire (Portugal)</strong>
+            <p>Maps, charts, and data views for wildfire analysis.</p>
+          </div>
+        </article>
+
+        <article class="gallery-card">
+          <img src="assets/transnitya.png" alt="TransNithya urban mobility UI" />
+          <div class="gallery-card-body">
+            <strong>TransNithya – Urban Mobility Assistant</strong>
+            <p>Route search, recommendations, and transport options.</p>
+          </div>
+        </article>
+
+        <article class="gallery-card">
+          <img src="assets/waste-segregation.png" alt="Smart waste segregation hardware prototype" />
+          <div class="gallery-card-body">
+            <strong>Smart Waste Segregation</strong>
+            <p>Sensor setup and conveyor‑based classification prototype.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <span>© <span id="year"></span> Laxman Mailari. All rights reserved.</span>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Scroll Reveal Animation
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in-up').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
