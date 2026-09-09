@@ -1,246 +1,627 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <title>Laxman Mailari | Software Engineer Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests">
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laxman Mailari — Software &amp; Data Engineer</title>
+<meta name="description" content="Portfolio of Laxman Mailari — software and data engineer specializing in real-time, event-driven systems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0b2338;
+    --panel:#0f2c44;
+    --panel-2:#12314c;
+    --line:#6fb7c9;
+    --line-dim:rgba(111,183,201,0.28);
+    --text:#eaf0f2;
+    --text-dim:#93aebd;
+    --accent:#e8a15a;
+    --sans:'IBM Plex Sans', system-ui, sans-serif;
+    --mono:'IBM Plex Mono', ui-monospace, monospace;
+    --maxw:920px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--line);}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+
+  /* ---------- nav ---------- */
+  header.site-nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(11,35,56,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line-dim);
+  }
+  .nav-inner{
+    max-width:var(--maxw); margin:0 auto; padding:14px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+    flex-wrap:wrap; gap:10px;
+  }
+  .nav-mark{
+    font-family:var(--mono); font-size:14px; color:var(--text);
+    letter-spacing:0.02em;
+  }
+  .nav-mark span{color:var(--line);}
+  nav.links{display:flex; gap:22px; flex-wrap:wrap;}
+  nav.links a{
+    color:var(--text-dim); text-decoration:none; font-size:14px;
+    font-family:var(--mono); padding:4px 0;
+    border-bottom:1px solid transparent;
+  }
+  nav.links a:hover{color:var(--text); border-bottom-color:var(--line);}
+  nav.links a.active{color:var(--text); border-bottom-color:var(--line);}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    padding:96px 0 80px;
+    border-bottom:1px solid var(--line-dim);
+    overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute; inset:0; z-index:0;
+    opacity:0.9;
+  }
+  .hero-bg svg{width:100%; height:100%; display:block;}
+  .hero-bg::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(11,35,56,0.2) 0%, var(--ink) 85%);
+  }
+  .node{ animation:twinkle 4.5s ease-in-out infinite; }
+  .node:nth-child(2n){ animation-delay:1.2s; }
+  .node:nth-child(3n){ animation-delay:2.4s; }
+  @keyframes twinkle{
+    0%, 100% { opacity:0.55; }
+    50% { opacity:1; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .node{ animation:none; }
+  }
+  .hero-content{position:relative; z-index:1;}
+  .hero-eyebrow{
+    font-family:var(--mono); font-size:14px; color:var(--line);
+    margin:0 0 10px;
+  }
+  .hero h1{
+    font-size:clamp(32px,5vw,46px);
+    margin:0 0 8px;
+    font-weight:700;
+    letter-spacing:-0.01em;
+  }
+  .hero-role{
+    font-family:var(--mono);
+    color:var(--text-dim);
+    font-size:15px;
+    margin:0 0 20px;
+  }
+  .hero p.lede{
+    color:var(--text-dim);
+    font-size:17px;
+    max-width:52ch;
+    margin:0 0 30px;
+  }
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:22px;}
+  .btn{
+    font-family:var(--mono); font-size:13.5px;
+    padding:11px 18px;
+    border:1px solid var(--line);
+    color:var(--text);
+    text-decoration:none;
+    display:inline-block;
+    transition:background 0.15s ease, color 0.15s ease;
+  }
+  .btn:hover{background:var(--line); color:var(--ink);}
+  .btn.primary{background:var(--line); color:var(--ink);}
+  .btn.primary:hover{background:transparent; color:var(--text);}
+  .btn.ghost{border-color:var(--line-dim); color:var(--text-dim);}
+  .btn.ghost:hover{background:transparent; border-color:var(--line); color:var(--text);}
+  .social-row{display:flex; gap:18px;}
+  .social-row a{
+    font-family:var(--mono); font-size:13px; color:var(--text-dim);
+    text-decoration:none; border-bottom:1px solid transparent;
+  }
+  .social-row a:hover{color:var(--text); border-bottom-color:var(--line);}
+
+  /* ---------- section shell ---------- */
+  section{padding:56px 0;}
+  section.alt{background:rgba(255,255,255,0.015);}
+  .section-head{
+    display:flex; align-items:baseline; gap:14px;
+    margin-bottom:30px;
+    border-bottom:1px solid var(--line-dim);
+    padding-bottom:14px;
+  }
+  .section-num{font-family:var(--mono); color:var(--line); font-size:13px;}
+  .section-head h2{font-size:22px; margin:0; font-weight:600;}
+
+  /* ---------- experience timeline ---------- */
+  .timeline{position:relative; padding-left:26px;}
+  .timeline::before{
+    content:""; position:absolute; left:5px; top:6px; bottom:6px;
+    width:1px; background:var(--line-dim);
+  }
+  .role{position:relative; margin-bottom:44px;}
+  .role:last-child{margin-bottom:0;}
+  .role::before{
+    content:""; position:absolute; left:-26px; top:5px;
+    width:9px; height:9px; border:1px solid var(--line); background:var(--ink);
+  }
+  .role-head{display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px; margin-bottom:4px;}
+  .role-title{font-weight:600; font-size:16.5px;}
+  .role-meta{font-family:var(--mono); font-size:12.5px; color:var(--text-dim);}
+  .role ul{margin:12px 0 0; padding-left:18px; color:var(--text-dim); font-size:15px;}
+  .role li{margin-bottom:8px;}
+  .role li::marker{color:var(--line);}
+
+  /* ---------- projects ---------- */
+  .filters{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:28px;}
+  .filter-btn{
+    font-family:var(--mono); font-size:12.5px;
+    background:transparent; color:var(--text-dim);
+    border:1px solid var(--line-dim); padding:7px 13px;
+    cursor:pointer;
+  }
+  .filter-btn:hover{color:var(--text); border-color:var(--line);}
+  .filter-btn.active{color:var(--ink); background:var(--line); border-color:var(--line);}
+
+  .proj-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .proj-card{
+    position:relative;
+    border:1px solid var(--line-dim);
+    padding:20px;
+    background:var(--panel);
+  }
+  .proj-card::before, .proj-card::after,
+  .proj-card .tick-br, .proj-card .tick-bl{
+    content:""; position:absolute; width:10px; height:10px;
+  }
+  .proj-card::before{top:-1px; left:-1px; border-top:1px solid var(--line); border-left:1px solid var(--line);}
+  .proj-card::after{top:-1px; right:-1px; border-top:1px solid var(--line); border-right:1px solid var(--line);}
+  .proj-card .tick-bl{bottom:-1px; left:-1px; border-bottom:1px solid var(--line); border-left:1px solid var(--line);}
+  .proj-card .tick-br{bottom:-1px; right:-1px; border-bottom:1px solid var(--line); border-right:1px solid var(--line);}
+
+  .proj-meta{display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;}
+  .proj-cat{font-family:var(--mono); font-size:11px; color:var(--line); text-transform:none;}
+  .proj-date{font-family:var(--mono); font-size:11px; color:var(--text-dim);}
+  .proj-card h3{margin:0 0 10px; font-size:16.5px; font-weight:600;}
+  .proj-card p{margin:0 0 14px; color:var(--text-dim); font-size:14px;}
+  .tagrow{display:flex; flex-wrap:wrap; gap:6px;}
+  .tag{
+    font-family:var(--mono); font-size:11px; color:var(--text-dim);
+    border:1px solid var(--line-dim); padding:3px 8px;
+  }
+
+  /* ---------- skills ---------- */
+  .skills-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px 40px;}
+  .skill-group h4{
+    font-family:var(--mono); font-size:12.5px; color:var(--line);
+    margin:0 0 12px; font-weight:500;
+  }
+  .skill-group .tagrow{margin-bottom:8px;}
+
+  /* ---------- education ---------- */
+  .edu-item{border-left:1px solid var(--line-dim); padding-left:20px; margin-bottom:26px;}
+  .edu-item:last-child{margin-bottom:0;}
+  .edu-item h3{margin:0 0 4px; font-size:16px; font-weight:600;}
+  .edu-item .role-meta{margin-bottom:4px; display:block;}
+  .edu-item p{margin:4px 0 0; color:var(--text-dim); font-size:14.5px;}
+
+  /* ---------- footer ---------- */
+  footer{
+    border-top:1px solid var(--line-dim);
+    padding:40px 0 60px;
+  }
+  .footer-inner{display:flex; justify-content:space-between; flex-wrap:wrap; gap:20px;}
+  .footer-links{display:flex; gap:20px; flex-wrap:wrap;}
+  .footer-links a{font-family:var(--mono); font-size:13.5px; text-decoration:none; color:var(--text-dim);}
+  .footer-links a:hover{color:var(--text);}
+  .footer-note{font-family:var(--mono); font-size:12px; color:var(--text-dim); max-width:44ch;}
+
+  @media (max-width: 760px){
+    .proj-grid{grid-template-columns:1fr;}
+    .skills-grid{grid-template-columns:1fr;}
+  }
+</style>
 </head>
-
 <body>
-  <!-- TOP BAR -->
-  <header class="lm-header">
-    <div class="container">
-      <a href="index.html" class="lm-logo">
-        <img src="assets/logo-new.png" alt="Laxman Mailari Logo" class="lm-logo-mark" />
-        <div class="lm-logo-text">
-          <div class="lm-logo-name">Laxman Mailari</div>
-          <div class="lm-logo-slogan">Master’s Student at Uva & VU Amsterdam · Ex-Software Engineer</div>
-        </div>
-      </a>
 
-      <nav class="lm-nav">
-        <a href="index.html" class="active">Home</a>
-        <a href="projects.html">Projects</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-      </nav>
+<header class="site-nav">
+  <div class="nav-inner">
+    <div class="nav-mark">laxman<span>.</span>mailari</div>
+    <nav class="links">
+      <a href="#experience">Experience</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <svg viewBox="0 0 920 480" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#6fb7c9" stroke-opacity="0.22" stroke-width="1">
+        <line x1="60" y1="60" x2="180" y2="130"/>
+        <line x1="180" y1="130" x2="140" y2="230"/>
+        <line x1="180" y1="130" x2="300" y2="90"/>
+        <line x1="300" y1="90" x2="410" y2="150"/>
+        <line x1="410" y1="150" x2="380" y2="270"/>
+        <line x1="410" y1="150" x2="540" y2="110"/>
+        <line x1="540" y1="110" x2="650" y2="180"/>
+        <line x1="650" y1="180" x2="620" y2="300"/>
+        <line x1="650" y1="180" x2="770" y2="120"/>
+        <line x1="770" y1="120" x2="860" y2="200"/>
+        <line x1="140" y1="230" x2="260" y2="300"/>
+        <line x1="260" y1="300" x2="380" y2="270"/>
+        <line x1="380" y1="270" x2="470" y2="360"/>
+        <line x1="470" y1="360" x2="620" y2="300"/>
+        <line x1="620" y1="300" x2="700" y2="400"/>
+        <line x1="60" y1="60" x2="40" y2="180"/>
+        <line x1="40" y1="180" x2="140" y2="230"/>
+        <line x1="770" y1="120" x2="810" y2="40"/>
+        <line x1="700" y1="400" x2="600" y2="440"/>
+        <line x1="260" y1="300" x2="200" y2="410"/>
+      </g>
+      <g fill="#6fb7c9">
+        <circle class="node" cx="60" cy="60" r="3"/>
+        <circle class="node" cx="180" cy="130" r="3"/>
+        <circle class="node" cx="140" cy="230" r="3"/>
+        <circle class="node" cx="300" cy="90" r="3"/>
+        <circle class="node" cx="410" cy="150" r="3.5"/>
+        <circle class="node" cx="380" cy="270" r="3"/>
+        <circle class="node" cx="540" cy="110" r="3"/>
+        <circle class="node" cx="650" cy="180" r="3.5"/>
+        <circle class="node" cx="620" cy="300" r="3"/>
+        <circle class="node" cx="770" cy="120" r="3"/>
+        <circle class="node" cx="860" cy="200" r="3"/>
+        <circle class="node" cx="260" cy="300" r="3"/>
+        <circle class="node" cx="470" cy="360" r="3"/>
+        <circle class="node" cx="700" cy="400" r="3"/>
+        <circle class="node" cx="40" cy="180" r="2.5"/>
+        <circle class="node" cx="810" cy="40" r="2.5"/>
+        <circle class="node" cx="600" cy="440" r="2.5"/>
+        <circle class="node" cx="200" cy="410" r="2.5"/>
+      </g>
+    </svg>
+  </div>
+  <div class="wrap hero-content">
+    <p class="hero-eyebrow">Hi, I'm</p>
+    <h1>Laxman Mailari</h1>
+    <p class="hero-role">Software &amp; Data Engineer</p>
+    <p class="lede">Four years building production event-driven systems — now deepening that foundation through an MSc in Big Data Engineering at UvA &amp; VU Amsterdam.</p>
+    <div class="hero-ctas">
+      <a class="btn primary" href="#contact">Get in touch</a>
+      <a class="btn ghost" href="#projects">View work</a>
     </div>
-  </header>
-
-  <main class="container">
-    <!-- HERO -->
-    <section class="hero-main fade-in-up">
-      <div class="hero-text-block">
-        <h1>Hi, I’m Laxman</h1>
-        <p>
-          Software Engineer with 4+ years of experience in backend development,
-          specializing in real‑time data processing, API development, and
-          database optimization. Skilled in Java, Spring Boot, Kafka, MQTT, and
-          MongoDB. Experienced in building scalable solutions and delivering
-          features from design to deployment.
-        </p>
-        <div class="hero-buttons">
-          <a href="projects.html" class="btn primary">View Projects</a>
-          <a href="#contact" class="btn ghost">Contact Me</a>
-        </div>
-      </div>
-
-      <div class="hero-image-block">
-        <img src="assets/profile.jpeg" alt="Photo of Laxman Mailari" />
-      </div>
-    </section>
-
-    <!-- PROJECTS HEADER -->
-    <section id="home-projects" class="section-header fade-in-up">
-      <h2>Personal Projects</h2>
-      <p>
-        A curated selection of recent projects that showcase my skills and interests.
-      </p>
-    </section>
-
-    <!-- PROJECTS GRID -->
-    <section class="projects-grid fade-in-up">
-      <article class="project-card">
-        <img src="assets/nyc_taxi.avif" alt="NYC Taxi analytics placeholder" />
-        <div class="project-content">
-          <h3>NYC Taxi Incremental Analytics</h3>
-          <p>
-            Investigating incremental batch vs full recomputation for large-scale
-            taxi ride datasets.
-          </p>
-        </div>
-      </article>
-      <article class="project-card">
-        <img src="assets/project-wildfire.jpg" alt="Wildfire digital twin" />
-        <div class="project-content">
-          <h3>Digital Twin of Wildfire</h3>
-          <p>
-            Data platform that models wildfire behaviour across Portugal with
-            interactive maps and analytics.
-          </p>
-        </div>
-      </article>
-
-      <article class="project-card">
-        <img src="assets/transnitya.png" alt="TransNithya mobility app" />
-        <div class="project-content">
-          <h3>TransNithya</h3>
-          <p>
-            Full‑stack urban mobility assistant to explore public transport
-            options and reduce traffic.
-          </p>
-        </div>
-      </article>
-
-      <!-- <article class="project-card">
-        <img src="assets/waste-segregation.png" alt="Smart waste segregation prototype" />
-        <div class="project-content">
-          <h3>Smart Waste Segregation</h3>
-          <p>
-            IoT and computer‑vision prototype for automatic waste
-            classification on a conveyor.
-          </p>
-        </div>
-      </article> -->
-
-    </section>
-
-    <div class="projects-link-row fade-in-up">
-      <a href="projects.html" class="link-more">
-        View detailed project case studies →
-      </a>
+    <div class="social-row">
+      <a href="https://linkedin.com/in/laxman-mailari/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/laxmanmverse4699" target="_blank" rel="noopener">GitHub</a>
     </div>
+  </div>
+</section>
 
-    <!-- TESTIMONIALS BAND -->
-    <section class="testimonials-band fade-in-up">
-      <div class="quote-box">
-        <h2>Motivation</h2>
-        <p>
-          “Don’t focus on impressing others; focus on expressing yourself.”
-        </p>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="contact-band fade-in-up">
-      <div class="contact-grid">
-        <div class="contact-left">
-          <h2>Let’s build resilient data platforms</h2>
-          <p>
-            I partner with teams that need a calm, detail‑driven engineer across
-            backend, streaming, and data-intensive products. Happy to discuss new
-            roles, consulting engagements, or collaborations.
-          </p>
-          <ul class="contact-focus">
-            <li>Response within 24 hours</li>
-            <li>Remote-friendly, based in Amsterdam</li>
-            <li>Available for 2025 internships &amp; part-time work</li>
-          </ul>
-          <div class="contact-cta">
-            <a class="btn primary ob-email-link" href="#" data-user="laxman.laxman" data-domain="student.uva.nl">
-              Schedule an intro call
-            </a>
-            <a class="btn ghost" href="resume.pdf" target="_blank" rel="noopener">
-              Download resume
-            </a>
-          </div>
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2>Experience</h2>
+    </div>
+    <div class="timeline">
+      <div class="role">
+        <div class="role-head">
+          <span class="role-title">Software Engineer — Kloudspot</span>
+          <span class="role-meta">Jul 2021 – Jul 2025 · Bangalore, India</span>
         </div>
+        <ul>
+          <li>Contributed to airside flight detection at an airport by integrating camera feeds and flight radar data, enabling real-time vehicle signalling through a custom rule engine; enhanced Apache Flink processing for flight event detection and signal dispatching, delivered to production.</li>
+          <li>Developed secure, high-performance REST APIs serving analytical data from MongoDB for real-time dashboards and analytics.</li>
+          <li>Implemented a WebSocket-based streaming layer consuming real-time Kafka data to deliver live analytics to dashboards.</li>
+          <li>Reduced MongoDB query latency by over 70% by refactoring aggregation pipelines, introducing targeted indexes, and optimizing query structures.</li>
+          <li>Built a scalable MQTT-based ingestion pipeline to capture real-time sensor and third-party IoT telemetry across integration partners.</li>
+          <li>Integrated real-time communication channels via WhatsApp (Meta API) and SMS (Twilio/Sparrow) for instant alerts and reports.</li>
+        </ul>
+      </div>
+      <div class="role">
+        <div class="role-head">
+          <span class="role-title">Software Engineering Intern — Kloudspot</span>
+          <span class="role-meta">Feb 2021 – Jul 2021 · Bangalore, India</span>
+        </div>
+        <ul>
+          <li>Built the backend for TransNithya, an urban mobility application, using Java/Spring Boot, and developed the frontend with Angular/JavaScript — see <a href="#transnithya">project detail</a> below.</li>
+          <li>Containerized the application components and deployed them to AWS EC2.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <div class="contact-items">
-          <a class="contact-item ob-email-link" href="#" data-user="laxman.laxman" data-domain="student.uva.nl">
-            <div class="contact-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                  stroke-linejoin="round" />
-              </svg>
-            </div>
-            <div>
-              <span class="label"
-                style="display:block; font-size:0.8rem; color:var(--text-muted); margin-bottom:4px;">Email</span>
-              <strong class="ob-email" data-user="laxman.laxman" data-domain="student.uva.nl"></strong>
-            </div>
-          </a>
+<section id="achievements">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2>Achievements</h2>
+    </div>
+    <div class="timeline">
+      <div class="role">
+        <div class="role-head">
+          <span class="role-title">IMC Prosperity 4 — Finalist Crew</span>
+          <span class="role-meta">2026</span>
+        </div>
+        <ul>
+          <li>Competed in IMC Trading's global algorithmic trading challenge as part of Team ExMachina, finishing #871 out of 18,803 teams (top 5% globally) across five rounds covering market making, options trading, and risk analysis in a simulated market environment.</li>
+          <li>Contributed as part of a four-person team building and iterating on algorithmic trading strategies in Python under time pressure across successive rounds.</li>
+        </ul>
+      </div>
+      <div class="role">
+        <div class="role-head">
+          <span class="role-title">Optiver Trading Academy</span>
+          <span class="role-meta">2026</span>
+        </div>
+        <ul>
+          <li>Completed Optiver's Trading Academy, covering options pricing, market making, and order book mechanics, and built and tested a trading algorithm in Optibook, Optiver's simulated exchange, as part of a two-person team.</li>
+          <li>Competed in a closing trading event running the team's algorithm against other participants' strategies.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
-          <a class="contact-item" href="https://github.com/laxmanmverse4699" target="_blank" rel="noopener">
-            <div class="contact-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-              </svg>
-            </div>
-            <div>
-              <span class="label"
-                style="display:block; font-size:0.8rem; color:var(--text-muted); margin-bottom:4px;">GitHub</span>
-              <strong>github.com/laxmanmverse4699</strong>
-            </div>
-          </a>
+<section class="alt" id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2>Projects</h2>
+    </div>
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="data-eng">Data Engineering</button>
+      <button class="filter-btn" data-filter="distributed">Distributed Systems</button>
+      <button class="filter-btn" data-filter="ml">Machine Learning</button>
+      <button class="filter-btn" data-filter="backend">Backend &amp; Full-Stack</button>
+    </div>
+    <div class="proj-grid" id="projGrid">
 
-          <a class="contact-item" href="https://www.linkedin.com/in/laxman-m-53b8b8186/" target="_blank" rel="noopener">
-            <div class="contact-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                <rect x="2" y="9" width="4" height="12" />
-                <circle cx="4" cy="4" r="2" />
-              </svg>
-            </div>
-            <div>
-              <span class="label"
-                style="display:block; font-size:0.8rem; color:var(--text-muted); margin-bottom:4px;">LinkedIn</span>
-              <strong>linkedin.com/in/laxman-m-53b8b8186</strong>
-            </div>
-          </a>
+      <article class="proj-card" data-cat="data-eng">
+        <div class="tick-bl"></div><div class="tick-br"></div>
+        <div class="proj-meta"><span class="proj-cat">Data Engineering</span><span class="proj-date">Jan 2026</span></div>
+        <h3>Incremental Data Processing for NYC Taxi Ride Analytics</h3>
+        <p>Investigated whether incremental batch processing offers meaningful advantages over full re-computation at scale. Captured row-level changes from Postgres with Debezium, streamed them through Kafka, and applied incremental loads into DuckDB, comparing pipelines against full re-computation across latency, delta scalability, and resource utilization — achieving a 45× latency improvement and over 100× CPU reduction at 20M rows. Built a Streamlit dashboard for A/B evaluation of ride metrics.</p>
+        <div class="tagrow">
+          <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Postgres</span>
+          <span class="tag">Debezium</span><span class="tag">Kafka</span><span class="tag">DuckDB</span><span class="tag">Streamlit</span>
+        </div>
+      </article>
+
+      <article class="proj-card" data-cat="data-eng">
+        <div class="tick-bl"></div><div class="tick-br"></div>
+        <div class="proj-meta"><span class="proj-cat">Data Engineering</span><span class="proj-date">Sep–Oct 2025</span></div>
+        <h3>Digital Twin for Wildfire</h3>
+        <p>Developed a Portugal-wide wildfire Digital Twin transforming historical, meteorological, and satellite data into a unified spatiotemporal analysis platform. Led end-to-end data preprocessing and normalization to visualize fire ignition patterns, temporal trends, and high-risk regions with real-time data refresh, and built interactive map- and chart-based dashboards for researchers and emergency responders.</p>
+        <div class="tagrow">
+          <span class="tag">Python</span><span class="tag">Kafka</span><span class="tag">Flask</span>
+          <span class="tag">InfluxDB</span><span class="tag">OpenStreetMap</span><span class="tag">LightGBM</span>
+        </div>
+      </article>
+
+      <article class="proj-card" data-cat="distributed backend">
+        <div class="tick-bl"></div><div class="tick-br"></div>
+        <div class="proj-meta"><span class="proj-cat">Distributed Systems</span><span class="proj-date">Coursework · MSc</span></div>
+        <h3>Mini Database-as-a-Service for Rideshare</h3>
+        <p>Designed and implemented a fault-tolerant, highly available DBaaS layer for a multi-service rideshare application, decoupling service containers from direct database access behind an Application Load Balancer. Built an Orchestrator routing reads to replica nodes and writes to a master via RabbitMQ queues, with the master propagating writes to two slave replicas to maintain consistency; containerized and deployed the full system on AWS EC2.</p>
+        <div class="tagrow">
+          <span class="tag">Flask</span><span class="tag">RabbitMQ</span><span class="tag">Docker</span>
+          <span class="tag">AWS EC2</span><span class="tag">Replication</span>
+        </div>
+      </article>
+
+      <article class="proj-card" data-cat="backend">
+        <div class="tick-bl"></div><div class="tick-br"></div>
+        <div class="proj-meta"><span class="proj-cat">Backend &amp; Infra</span><span class="proj-date">Coursework · MSc</span></div>
+        <h3>URL Shortener — Docker to Kubernetes</h3>
+        <p>Built a URL shortener as a multi-stage project progressing from a single containerized application to a fully orchestrated deployment. Implemented the core service in FastAPI with RS256-signed JWT authentication, containerized it with Docker, configured NGINX as a reverse proxy, and progressively migrated the deployment onto Kubernetes across successive assignments.</p>
+        <div class="tagrow">
+          <span class="tag">FastAPI</span><span class="tag">Docker</span><span class="tag">Kubernetes</span>
+          <span class="tag">NGINX</span><span class="tag">JWT</span>
+        </div>
+      </article>
+
+      <article class="proj-card" data-cat="backend" id="transnithya">
+        <div class="tick-bl"></div><div class="tick-br"></div>
+        <div class="proj-meta"><span class="proj-cat">Backend &amp; Full-Stack</span><span class="proj-date">Feb–Jul 2021</span></div>
+        <h3>TransNithya — Urban Mobility Assistant</h3>
+        <p>Built a full-stack application connecting citizens with public transportation options to help mitigate urban traffic congestion in Bangalore. Engineered the backend with Java/Spring Boot, built the frontend with Angular/JavaScript, and containerized and deployed the application to AWS EC2.</p>
+        <div class="tagrow">
+          <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Angular</span>
+          <span class="tag">Docker</span><span class="tag">AWS EC2</span>
+        </div>
+      </article>
+
+      <article class="proj-card" data-cat="distributed">
+        <div class="tick-bl"></div><div class="tick-br"></div>
+        <div class="proj-meta"><span class="proj-cat">Distributed Systems</span><span class="proj-date">Coursework · MSc</span></div>
+        <h3>Mini Java Compiler</h3>
+        <p>Built a compiler front-to-back-end for a subset of Java, covering lexical analysis, parsing, semantic analysis, and code generation. Used Flex and Bison to implement the lexer and parser, constructed an Abstract Syntax Tree to represent program structure, and implemented a code generation stage translating the AST into executable output.</p>
+        <div class="tagrow">
+          <span class="tag">C</span><span class="tag">Flex</span><span class="tag">Bison</span><span class="tag">AST</span>
+        </div>
+      </article>
+
+      <article class="proj-card" data-cat="distributed">
+        <div class="tick-bl"></div><div class="tick-br"></div>
+        <div class="proj-meta"><span class="proj-cat">Distributed Systems</span><span class="proj-date">Coursework · MSc</span></div>
+        <h3>N-body MPI Simulation</h3>
+        <p>Implemented a parallel N-body gravitational simulation in Julia using MPI, distributing particle computation across 128 ranks on the DAS-5 distributed computing cluster; partitioned the simulation domain across processes and managed inter-rank communication for force calculations.</p>
+        <div class="tagrow">
+          <span class="tag">Julia</span><span class="tag">MPI</span><span class="tag">DAS-5 cluster</span>
+        </div>
+      </article>
+
+      <article class="proj-card" data-cat="distributed">
+        <div class="tick-bl"></div><div class="tick-br"></div>
+        <div class="proj-meta"><span class="proj-cat">Distributed Systems</span><span class="proj-date">Coursework · MSc</span></div>
+        <h3>Mandelbrot Set Parallel Generation</h3>
+        <p>Implemented a parallel Mandelbrot set generator in Julia using the Distributed standard library, partitioning the image grid across worker processes and benchmarking generation time across varying process counts; achieved a 5.59× speedup at 16 processes relative to sequential execution.</p>
+        <div class="tagrow">
+          <span class="tag">Julia</span><span class="tag">Distributed.jl</span>
+        </div>
+      </article>
+
+      <article class="proj-card" data-cat="ml">
+        <div class="tick-bl"></div><div class="tick-br"></div>
+        <div class="proj-meta"><span class="proj-cat">Machine Learning</span><span class="proj-date">Coursework · MSc</span></div>
+        <h3>Hotel Ranking with Learning-to-Rank</h3>
+        <p>Built a hotel ranking model using LambdaRank and XGBoost/LightGBM, applying Inverse Propensity Weighting to correct for position bias in historical click and booking data; evaluated ranking quality using NDCG@5, achieving a score of 0.407.</p>
+        <div class="tagrow">
+          <span class="tag">Python</span><span class="tag">LightGBM</span><span class="tag">XGBoost</span><span class="tag">LambdaRank</span>
+        </div>
+      </article>
+
+      <article class="proj-card" data-cat="ml">
+        <div class="tick-bl"></div><div class="tick-br"></div>
+        <div class="proj-meta"><span class="proj-cat">Machine Learning</span><span class="proj-date">Jun 2026</span></div>
+        <h3>Cycling Road Surface Classification</h3>
+        <p>Built an ML pipeline to classify road surface type from handlebar-mounted smartphone IMU data collected across Amsterdam. Applied multi-method outlier detection (Chauvenet, GMM, LOF), Butterworth low-pass filtering, and time/frequency-domain feature engineering, reducing 238K raw sensor rows into 23.8K feature windows for classifier training.</p>
+        <div class="tagrow">
+          <span class="tag">Python</span><span class="tag">scikit-learn</span><span class="tag">Signal Processing</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2>Skills</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>Languages</h4>
+        <div class="tagrow">
+          <span class="tag">Java</span><span class="tag">Python</span><span class="tag">JavaScript</span>
+          <span class="tag">Julia</span><span class="tag">C</span>
         </div>
       </div>
-    </section>
-  </main>
+      <div class="skill-group">
+        <h4>Data &amp; Streaming</h4>
+        <div class="tagrow">
+          <span class="tag">Apache Kafka</span><span class="tag">Apache Flink</span><span class="tag">MQTT</span>
+          <span class="tag">AVRO</span><span class="tag">Debezium (CDC)</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Databases</h4>
+        <div class="tagrow">
+          <span class="tag">MongoDB</span><span class="tag">PostgreSQL</span><span class="tag">DuckDB</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Backend &amp; Web</h4>
+        <div class="tagrow">
+          <span class="tag">Spring Boot</span><span class="tag">FastAPI</span><span class="tag">Flask</span>
+          <span class="tag">Angular</span><span class="tag">REST APIs</span><span class="tag">WebSockets</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Cloud &amp; Infrastructure</h4>
+        <div class="tagrow">
+          <span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">AWS EC2</span>
+          <span class="tag">RabbitMQ</span><span class="tag">NGINX</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Machine Learning</h4>
+        <div class="tagrow">
+          <span class="tag">scikit-learn</span><span class="tag">XGBoost</span><span class="tag">LightGBM</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <footer class="page-footer">
-    <span>© <span id="year"></span> Laxman Mailari. All rights reserved.</span>
-  </footer>
+<section class="alt" id="education">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <h2>Education</h2>
+    </div>
+    <div class="edu-item">
+      <h3>MSc Computer Science — Big Data Engineering (Joint Degree)</h3>
+      <span class="role-meta">University of Amsterdam (UvA) &amp; Vrije Universiteit Amsterdam (VU) · Sep 2025 – Expected Jul 2027</span>
+      <p>Coursework: Distributed Systems, Programming Large-Scale Parallel Systems, Parallel Programming, Web Services and Cloud, Digital Twin Engineering, Data Mining, Data Preparation, Advanced Algorithms, ML for Quantified Self, Dynamic Programming and RL, Software Testing, Research Methods in CS, Entrepreneurship in Analytics and AI.</p>
+    </div>
+    <div class="edu-item">
+      <h3>Bachelor of Technology, Computer Science</h3>
+      <span class="role-meta">PES University, Bangalore, India · Aug 2017 – Jun 2021 · CGPA 7.78</span>
+    </div>
+  </div>
+</section>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+<footer id="contact">
+  <div class="wrap footer-inner">
+    <div>
+      <div class="footer-links">
+        <a href="mailto:laxman.laxman@student.uva.nl">laxman.laxman@student.uva.nl</a>
+        <a href="https://linkedin.com/in/laxman-mailari/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/laxmanmverse4699" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <p class="footer-note">Amsterdam, Netherlands. Open to graduation internships and full-time roles in distributed systems and data platform engineering.</p>
+  </div>
+</footer>
 
-    // Scroll Reveal Animation
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: "0px 0px -50px 0px"
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
+<script>
+  const buttons = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.proj-card');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      cards.forEach(card => {
+        const cats = card.dataset.cat.split(' ');
+        card.style.display = (f === 'all' || cats.includes(f)) ? '' : 'none';
       });
-    }, observerOptions);
-
-    document.querySelectorAll('.fade-in-up').forEach(el => {
-      observer.observe(el);
     });
+  });
 
-    // Email obfuscation
-    document.querySelectorAll('.ob-email').forEach(el => {
-      const user = el.getAttribute('data-user');
-      const domain = el.getAttribute('data-domain');
-      if (user && domain) {
-        el.textContent = `${user}@${domain}`;
+  // Nav scroll-spy: highlight the link for whichever section is in view
+  const navLinks = document.querySelectorAll('nav.links a');
+  const linkByTarget = new Map();
+  navLinks.forEach(link => linkByTarget.set(link.getAttribute('href').slice(1), link));
+
+  const spySections = document.querySelectorAll('section[id], footer[id]');
+  const spyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const link = linkByTarget.get(entry.target.id);
+        if (link) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+        }
       }
     });
-    document.querySelectorAll('.ob-email-link').forEach(a => {
-      const user = a.getAttribute('data-user');
-      const domain = a.getAttribute('data-domain');
-      if (user && domain) {
-        a.setAttribute('href', `mailto:${user}@${domain}`);
-      }
-    });
-  </script>
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+
+  spySections.forEach(sec => spyObserver.observe(sec));
+</script>
+
 </body>
-
 </html>
