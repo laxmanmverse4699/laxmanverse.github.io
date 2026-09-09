@@ -2,7 +2,7 @@
 
 A personal portfolio website showcasing my projects, skills, and experience as a Software Engineer.
 
-## 🚀 How to Run
+## How to Run
 
 ### Option 1: Open Directly in Browser
 Simply open `index.html` in your web browser:
